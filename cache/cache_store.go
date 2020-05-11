@@ -121,10 +121,10 @@ func (link *linkedList) Delete(key interface{})  bool {
 
 	node := link.firstNode
 	//如果是首部
-	if node.Key == key {
+	if node != nil && node.Key == key {
 		link.firstNode = node.Next
 	}else{
-		for node.Next != nil {
+		for node != nil  &&  node.Next != nil {
 			//找到，改指针
 			if node.Next.Key == key{
 				node.Next = node.Next.Next
@@ -185,6 +185,17 @@ func (link *linkedList) isExpire(key string) (string,bool)  {
 		node = node.Next
 	}
 	return key,false
+}
+
+func (link *linkedList) Empty() bool{
+	node := link.firstNode
+	for node != nil  {
+		link.Delete(node.Key)
+		node = node.Next
+		//node = nil
+	}
+
+	return true
 }
 
 //获取所有过期的keys

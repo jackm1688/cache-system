@@ -13,7 +13,7 @@ func InitMCache()  {
 	//默认初始化一个cache实例，并设置可用存储不能过物理内存可用容量和总容量
 	logger.Info("init cache instance,cap:%v","256MB")
 	cache = NewCache("256MB",5) //可用存储容量
-	go clearExpireNode() //执行清理任务
+	//go clearExpireNode() //执行清理任务
 }
 
 
@@ -64,6 +64,6 @@ func Keys() int64 {
 	return t
 }
 
-func clearExpireNode(){
+func ClearExpireNode(){
 	cache.ClearExpireNode()
 }

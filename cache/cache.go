@@ -71,11 +71,11 @@ func (c *Cache)Exists(key string) bool{
 	return  c.cookieMap.IsExists(key)
 }
 
-// 情况所有值
+// 清空所有值
 func (c *Cache)Flush() bool{
 	c.rwLock.Lock()
 	defer c.rwLock.Unlock()
-	return  c.cookieMap.isEmpty()
+	return  c.cookieMap.Empty()
 }
 
 // 返回所有的key 多少

@@ -30,6 +30,14 @@ func main(){
 		//time.Sleep(200*time.Millisecond)
 	}
 
+	/*
+	time.Sleep(200*time.Millisecond)
+	cache.Flush()
+	time.Sleep(200*time.Millisecond)
+	fmt.Printf("get cache table size:%d\n",cache.Keys())
+	time.Sleep(200*time.Millisecond)
+    */
+
 	fmt.Printf("get cache table size:%d\n",cache.Keys())
 	//查询name100 key的值
 	val,ok :=cache.Get("name:100")
@@ -38,7 +46,10 @@ func main(){
 	cache.Del("name:100")
 	//查询name100 key是否删除成功
 	fmt.Printf("get name:100 key:%v\n",cache.Exists("name:100"))
-	select {
+	time.Sleep(2*time.Second) //等待两秒后开清理过期任务
+	go cache.ClearExpireNode()
+
+	select { //阻塞等待
 
 	}
 }
